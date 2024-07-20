@@ -2,7 +2,7 @@ import { Router } from "express";
 import * as familyController from "./family.controller.js";
 import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
 import { validationMiddleware } from "../../Middlewares/validation.middleware.js";
-import { AddFamilySchema, GeneralSchema } from "./family.schema.js";
+import { AddFamilySchema, GeneralSchema, UpdateFamilySchema } from "./family.schema.js";
 
 const router = Router();
 
@@ -28,5 +28,12 @@ router.delete(
   "/deleteFamilyById/:id",
   validationMiddleware(GeneralSchema),
   errorHandler(familyController.deleteFamilyById)
+)
+
+// update family by id
+router.put(
+  "/updateFamilyById/:id",
+  validationMiddleware(UpdateFamilySchema),
+  errorHandler(familyController.updateFamilyById)
 )
 export default router;

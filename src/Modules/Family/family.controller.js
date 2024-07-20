@@ -101,3 +101,47 @@ export const deleteFamilyById = async (req, res, next) => {
     .status(200)
     .json({ message: "Delete Family Success", deletedFamily });
 };
+
+//------------------------------------------------------------------------
+
+// update family by id
+
+/*
+1- find family by id
+2- check family exist
+3- destruct data from req.body
+4- update family
+5- return update family success
+*/
+
+export const updateFamilyById = async (req, res, next) => {
+  const { id } = req.params;
+  const family = await Family.findById(id);
+  if (!family) {
+    return next(
+      new ErrorClass("Family not found", 400, "familyId", "Update Family API")
+    );
+  }
+  const { familyName, comment } = req.body;
+  // check if familyName unique
+  const familyExist = await Family.findOne({ familyName });
+  if (familyExist && familyExist._id.toString() !== id) {
+    return next(
+      new ErrorClass(
+        "Family already exist",
+        400,
+        "familyName",
+        "Update Family API"
+      )
+    );
+  }
+  // update family
+  const updatedFamily = await Family.findByIdAndUpdate(
+    id,
+    { familyName, comment },
+    { new: true }
+  );
+  return res
+    .status(200)
+    .json({ message: "Update Family Success", updatedFamily });
+}
