@@ -12,11 +12,15 @@ import Family from "../../../DB/Models/family.model.js";
 5- return add family success
 */
 
-export const addFamily = async (req, res) => {
+export const addFamily = async (req, res,next) => {
   // destruct data from req.body
   const { familyName, comment } = req.body;
   // check if familyName exist
   const family = await Family.findOne({ familyName });
+  console.log(
+    "family",
+    family
+  )
   if (family) {
     // return error if familyName exist
     return next(

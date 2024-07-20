@@ -8,7 +8,7 @@ import {
 // add family
 
 export const AddFamilySchema = {
-  body: {
+  body: Joi.object({
     familyName: Joi.string().required().min(3).messages({
       "string.min": "familyName must be at least 3 characters long",
       "string.base": "familyName must be a string",
@@ -18,5 +18,5 @@ export const AddFamilySchema = {
       "string.min": "comment must be at least 3 characters long",
       "string.base": "jobTitle must be a string",
     }),
-  },
+  }),
 };
