@@ -23,7 +23,7 @@ export const AddFamilySchema = {
 
 // get family by id
 
-export const GetFamilyByIdSchema = {
+export const GeneralSchema = {
 params: Joi.object({
     id: Joi.string()
       .custom(objectIdValidation, "Object ID Validation")

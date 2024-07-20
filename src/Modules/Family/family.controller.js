@@ -76,3 +76,28 @@ export const getFamilyById = async (req, res, next) => {
 
   return res.status(200).json({ family });
 };
+
+//-----------------------------------------------------------------------
+
+// delete family by id
+
+/*
+1- find family by id
+2- check family exist
+3- delete family
+4- return delete family success
+*/
+
+export const deleteFamilyById = async (req, res, next) => {
+  const { id } = req.params;
+  const family = await Family.findById(id);
+  if (!family) {
+    return next(
+      new ErrorClass("Family not found", 400, "familyId", "Delete Family API")
+    );
+  }
+  const deletedFamily = await Family.findByIdAndDelete(id);
+  return res
+    .status(200)
+    .json({ message: "Delete Family Success", deletedFamily });
+};

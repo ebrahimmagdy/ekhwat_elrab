@@ -2,7 +2,7 @@ import { Router } from "express";
 import * as familyController from "./family.controller.js";
 import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
 import { validationMiddleware } from "../../Middlewares/validation.middleware.js";
-import { AddFamilySchema, GetFamilyByIdSchema } from "./family.schema.js";
+import { AddFamilySchema, GeneralSchema } from "./family.schema.js";
 
 const router = Router();
 
@@ -17,8 +17,16 @@ router.post(
 router.get("/getAllFamily", errorHandler(familyController.getAllFamily));
 
 // get family by id
-router.get("/getFamilyById/:id",
-       validationMiddleware(GetFamilyByIdSchema)
-     , errorHandler(familyController.getFamilyById));
+router.get(
+  "/getFamilyById/:id",
+  validationMiddleware(GeneralSchema),
+  errorHandler(familyController.getFamilyById)
+);
 
+// delete family by id
+router.delete(
+  "/deleteFamilyById/:id",
+  validationMiddleware(GeneralSchema),
+  errorHandler(familyController.deleteFamilyById)
+)
 export default router;
