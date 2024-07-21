@@ -6,6 +6,7 @@ import express from "express";
 import { connection_db } from "./DB/connection.js";
 import { globaleResponse } from "./src/Middlewares/error-handling.middleware.js";
 import familyRouter from "./src/Modules/Family/family.routes.js";
+import userRouter from "./src/Modules/User/user.routes.js";
 
 const app = express();
 config();
@@ -14,6 +15,7 @@ connection_db()
 app.use(express.json());
 app.get("/", (req, res) => res.send("Welcome Job App"));
 app.use("/family", familyRouter);
+app.use("/user", userRouter);
 
 app.use(globaleResponse)
 
