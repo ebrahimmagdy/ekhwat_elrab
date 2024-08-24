@@ -69,8 +69,8 @@ export const getAllResource = async (req, res, next) => {
   // find all resource
   const resources = await Resource.find();
   // return all resource
-  return res.status(200).json({count : resources.length , resources });
-}
+  return res.status(200).json({ count: resources.length, resources });
+};
 
 //------------------------------
 // get single resource by id
@@ -128,4 +128,42 @@ export const deleteResourceById = async (req, res, next) => {
   return res
     .status(200)
     .json({ message: "Resource deleted successfully", deleteResource });
+};
+//-------------------------------
+// update resource
+export const updateResourceById = async (req, res, next) => {
+  // check user online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  // destruct data from body
+  const { name, quantity, type } = req.body;
+
+  // find and update
+  const resource = await Resource.findById(req.params.id);
+
+  // check resource exist
+  if (!resource) {
+    return next(
+      new ErrorClass("Resource not found", 404, "id", "get single resource API")
+    );
+  }
+  
+  // update data use save
+  if (name) resource.name = name;
+  if (quantity) resource.quantity = quantity;
+  if (type) resource.type = type;
+  await resource.save();
+
+  return res
+    .status(200)
+    .json({ message: "Resource updated successfully", resource });
 };
