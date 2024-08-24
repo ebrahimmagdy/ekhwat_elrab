@@ -490,3 +490,60 @@ export const getAllUsers = async (req, res, next) => {
   return res.status(200).json({ count: users.length, users });
 };
 
+//----------------------------------
+// Get profile data for another user send the userId in params or query
+
+/**
+ * answer:
+ * after authentication and validation
+ * 1. check user online
+ * 2. destruct userId from params or query
+ * 3- check userId is provided in params or query
+ * 4- check if user exists
+ * 5- get user data
+ * 6- return user data
+ */
+
+export const getProfileData = async (req, res, next) => {
+  // check status online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "get profile data API"
+      )
+    );
+  }
+  // Destruct userId from params or query
+  const { userId } = req.params;
+  const { userId: queryUserId } = req.query;
+
+  // Check if userId is provided in params or query
+  if (!userId && !queryUserId) {
+    return next(
+      new ErrorClass(
+        "User ID is required",
+        400,
+        "Send User ID in params or query",
+        "get profile data API"
+      )
+    );
+  }
+
+  // Use userId from params if available, otherwise use from query
+  const idToSearch = userId || queryUserId;
+
+  // Get user data
+  const userData = await Admin_Volunteers.findById(idToSearch);
+
+  // Check if user is found
+  if (!userData) {
+    return next(new ErrorClass("User not found", 404, "get profile data API"));
+  }
+
+  // Return user data
+  return res.status(200).json({ userData });
+};
+

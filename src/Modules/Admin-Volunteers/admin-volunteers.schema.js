@@ -238,3 +238,29 @@ export const updateUserSchema = {
     ...generalRules.headers,
   }),
 };
+//---------------------
+
+/*
+  schema user profile through send id user in query or params
+*/
+
+export const profileSchema = Joi.object({
+  params: Joi.object({
+    userId: Joi.string()
+      .custom(objectIdValidation, "Object Id Validation")
+      .required()
+      .messages({
+        "any.required": "ID is required in params",
+        "string.base": "ID must be a string",
+      }),
+  }),
+  query: Joi.object({
+    userId: Joi.string()
+      .custom(objectIdValidation, "Object Id Validation")
+      .required()
+      .messages({
+        "any.required": "ID is required in query",
+        "string.base": "ID must be a string",
+      }),
+  }),
+}).or("params", "query"); // Use or to ensure either params or query contains userId

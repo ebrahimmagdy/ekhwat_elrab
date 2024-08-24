@@ -2,7 +2,7 @@ import { Router } from "express";
 import * as admin_volunteersController from "./admin-volunteers.controller.js";
 import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
 import { validationMiddleware } from "../../Middlewares/validation.middleware.js";
-import { generalSchemaCheckOnlyToken, SignInSchema, SignUpSchema, updateUserSchema } from "./admin-volunteers.schema.js";
+import { generalSchemaCheckOnlyToken, profileSchema, SignInSchema, SignUpSchema, updateUserSchema } from "./admin-volunteers.schema.js";
 import { authenticate } from "../../Middlewares/authentication.middleware.js";
 import { authorizationMiddleware } from "../../Middlewares/authorization.middleware.js";
 
@@ -58,6 +58,14 @@ router.get(
   errorHandler(authorizationMiddleware("admin")),
   errorHandler(validationMiddleware(generalSchemaCheckOnlyToken)),
   errorHandler(admin_volunteersController.getAllUsers)
+);
+// get profile api another user send userId in params and query
+router.get(
+  "/getProfileData/:userId?",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware("admin")),
+  errorHandler(validationMiddleware(profileSchema)),
+  errorHandler(admin_volunteersController.getProfileData)
 );
 
 
