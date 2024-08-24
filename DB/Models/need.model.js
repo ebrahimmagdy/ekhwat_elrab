@@ -28,10 +28,15 @@ const needSchema = new mongoose.Schema(
     },
     member: {
       type: Schema.Types.ObjectId,
-      ref:"User",
+      ref: "User",
     },
     price: {
       type: Number,
+    },
+    addedBy: {
+      type: Schema.Types.ObjectId,
+      ref: "Admin_Volunteers",
+      required: true,
     },
   },
   {

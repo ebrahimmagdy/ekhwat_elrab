@@ -1,6 +1,8 @@
 import { ErrorClass } from "../../utils/error-class.utils.js";
 
 import Family from "../../../DB/Models/family.model.js";
+import Need from "../../../DB/Models/need.model.js";
+import User from "../../../DB/Models/user.model.js";
 
 // add family
 
@@ -154,6 +156,11 @@ export const deleteFamilyById = async (req, res, next) => {
         new ErrorClass("Family not found", 400, "familyId", "Delete Family API")
       );
     }
+  // after delete family deleted all related this family users and needs
+  // delete all users
+  await User.deleteMany({ familyId: deletedFamily._id });
+  // delete all needs
+  await Need.deleteMany({ familyId: deletedFamily._id });
   return res
     .status(200)
     .json({ message: "Delete Family Success", deletedFamily });
