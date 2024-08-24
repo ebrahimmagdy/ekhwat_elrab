@@ -146,3 +146,33 @@ export const getAllNeedByFamily = async (req, res, next) => {
   // return all need
   return res.status(200).json({ count: needs.length, needs });
 };
+//-------------------------------------------------
+// delete need by id
+
+export const deleteNeedById = async (req, res, next) => {
+  // check user online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  const { id } = req.params;
+
+  // delete need
+  const deletedNeed = await Need.findByIdAndDelete(id);
+
+  // check need exist
+  if (!deletedNeed) {
+    return next(
+      new ErrorClass("Need not found", 400, "needId", "Delete Need By Id API")
+    );
+  }
+  // return delete need success
+  return res.status(200).json({ message: "Delete Need Success", deletedNeed });
+};

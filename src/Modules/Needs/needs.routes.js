@@ -40,5 +40,12 @@ router.get(
   errorHandler(needController.getAllNeedByFamily)
 
 )
-
+// delete need by id
+router.delete(
+  "/deleteNeedById/:id",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware("admin")),
+  errorHandler(validationMiddleware(GeneralSchema)),
+  errorHandler(needController.deleteNeedById)
+)
 export default router
