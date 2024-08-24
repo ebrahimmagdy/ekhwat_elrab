@@ -22,14 +22,14 @@ router.post(
 router.get(
   "/getAllResource",
   errorHandler(authenticate()),
-  errorHandler(authorizationMiddleware(["admin", "volunteer"])),
+  errorHandler(authorizationMiddleware("admin")),
   errorHandler(resourceController.getAllResource)
 );
 // get resource by id
 router.get(
   "/getResourceById/:id",
   errorHandler(authenticate()),
-  errorHandler(authorizationMiddleware(["admin", "volunteer"])),
+  errorHandler(authorizationMiddleware("admin")),
   errorHandler(validationMiddleware(GeneralSchema)),
   errorHandler(resourceController.getResourceById)
 );

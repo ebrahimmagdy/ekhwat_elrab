@@ -56,3 +56,23 @@ export const addNeeds = async (req, res, next) => {
   // return add needs success
   return res.status(200).json({ message: "Add Needs Success", savedNeeds });
 };
+//--------------------------------------
+// get all needs
+export const getAllNeeds = async (req, res, next) => {
+  // check user online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  // find all needs
+  const needs = await Need.find();
+  // return all needs
+  return res.status(200).json({ count : needs.length,message: "Get All Needs Success", needs });
+}

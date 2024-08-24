@@ -16,5 +16,13 @@ router.post(
   errorHandler(validationMiddleware(AddNeedsSchema)),
   errorHandler(needController.addNeeds)
 );
+// get all needs
+router.get(
+  "/getAllNeeds",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware(["admin", "volunteer"])),
+  errorHandler(needController.getAllNeeds)
+);
+
 
 export default router
