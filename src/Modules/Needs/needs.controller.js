@@ -76,3 +76,31 @@ export const getAllNeeds = async (req, res, next) => {
   // return all needs
   return res.status(200).json({ count : needs.length,message: "Get All Needs Success", needs });
 }
+//-------------------------------
+// get need by id
+
+export const getNeedById = async (req, res, next) => {
+  // check user online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+  const {id} = req.params
+
+  // find need by id
+  const need = await Need.findById(id);
+  // check need exist
+  if (!need) {
+    return next(
+      new ErrorClass("Need not found", 400, "needId", "Get Need By Id API")
+    );
+  }
+  // return need
+  return res.status(200).json({ need });
+}

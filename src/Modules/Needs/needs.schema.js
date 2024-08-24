@@ -38,3 +38,15 @@ export const AddNeedsSchema = {
       }),
   }),
 };
+//---------------------------
+//general schema check id in params 
+
+export const GeneralSchema = {
+  params: Joi.object({
+    id: Joi.string().custom(objectIdValidation, "Object ID Validation").required().messages({
+      "string.base": "id must be a string",
+      "string.pattern": "id must be a valid ObjectId",
+      "any.required": "id is required",
+    })
+  }),
+}
