@@ -431,3 +431,36 @@ export const updateAccount = async (req, res, next) => {
   // Return success response
   return res.status(200).json({ message: "Update Successful", updatedUser });
 };
+//-----------------------------------------------
+// Get user account data
+
+/*
+answer:
+after authentication and validation
+1. check user online
+2. get user data only owner the take id from req.authUser
+3. check user found
+4. return user data
+*/
+
+export const getAccountData = async (req, res, next) => {
+  // check status online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "get account data API"
+      )
+    );
+  }
+
+  // get user data only owner the take id from req.authUser
+  const userData = await Admin_Volunteers.findById(req.authUser._id);
+  // check user found
+  if (!userData) {
+    return next(new ErrorClass("User not found", 404, "get account data API"));
+  }
+  return res.status(200).json({ userData });
+};

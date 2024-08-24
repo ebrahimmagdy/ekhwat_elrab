@@ -42,6 +42,14 @@ router.put(
   errorHandler(validationMiddleware(updateUserSchema)),
   errorHandler(admin_volunteersController.updateAccount)
 );
+//get user api if user login
+router.get(
+  "/getAccountData",
+  errorHandler(authenticate()),
+  errorHandler(validationMiddleware(generalSchemaCheckOnlyToken)),
+  errorHandler(admin_volunteersController.getAccountData)
+);
+
 
 
 
