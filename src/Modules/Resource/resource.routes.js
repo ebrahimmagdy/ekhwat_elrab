@@ -33,4 +33,13 @@ router.get(
   errorHandler(validationMiddleware(GeneralSchema)),
   errorHandler(resourceController.getResourceById)
 );
+// delete resource by id
+router.delete(
+    
+  "/deleteResourceById/:id",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware("admin")),
+  errorHandler(validationMiddleware(GeneralSchema)),
+  errorHandler(resourceController.deleteResourceById)
+)
 export default router;
