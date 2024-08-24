@@ -2,7 +2,7 @@ import { Router } from "express";
 import * as userController from "./user.controller.js";
 import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
 import { validationMiddleware } from "../../Middlewares/validation.middleware.js";
-import { AddUserSchema } from "./user.schema.js";
+import { AddUserSchema, GeneralSchema } from "./user.schema.js";
 
 
 const router = Router();
@@ -17,6 +17,12 @@ router.post(
 router.get(
     "/getAllUser",
     errorHandler(userController.getAllUser)
+)
+// get user by id
+router.get(
+    "/getUserById/:id",
+    validationMiddleware(GeneralSchema),
+    errorHandler(userController.getUserById)
 )
 
 export default router;

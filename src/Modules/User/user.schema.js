@@ -59,3 +59,16 @@ export const AddUserSchema = {
       }),
   }),
 };
+//--------------------
+export const GeneralSchema = {
+  params: Joi.object({
+    id: Joi.string()
+      .custom(objectIdValidation, "Object ID Validation")
+      .required()
+      .messages({
+        "any.required": "Family ID is required",
+        "string.base": "Family ID must be a string",
+        "string.pattern": "Family ID must be a valid ObjectId",
+      }),
+  }),
+};

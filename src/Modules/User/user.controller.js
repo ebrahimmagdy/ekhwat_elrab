@@ -57,8 +57,8 @@ export const addUser = async (req, res, next) => {
 //get all User 
 
 /*
-1- find all u
-2- return all family
+1- find all user
+2- return all user
 */
 
 export const getAllUser = async (req, res) => {
@@ -66,3 +66,21 @@ export const getAllUser = async (req, res) => {
   return res.status(200).json({ count: user.length, user });
 };
 //-----------------------
+//get specific user by id
+
+/*
+1- find user by id
+2- check user exist
+3- return user
+*/
+
+export const getUserById = async (req, res, next) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return next(
+      new ErrorClass("User not found", 400, "userId", "Get User By Id API")
+    );
+  }
+  return res.status(200).json({ user });
+}
