@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as needController from "./needs.controller.js";
-import { AddNeedsSchema, GeneralSchema } from "./needs.schema.js";
+import { AddNeedsSchema, checkFamilyIdInQuery, GeneralSchema } from "./needs.schema.js";
 import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
 import { authenticate } from "../../Middlewares/authentication.middleware.js";
 import { authorizationMiddleware } from "../../Middlewares/authorization.middleware.js";
@@ -31,4 +31,14 @@ router.get(
   errorHandler(validationMiddleware(GeneralSchema)),
   errorHandler(needController.getNeedById)
 );
+// get all  need specific family
+router.get(
+  "/getAllNeedByFamily",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware(["admin", "volunteer"])),
+  errorHandler(validationMiddleware(checkFamilyIdInQuery)),
+  errorHandler(needController.getAllNeedByFamily)
+
+)
+
 export default router

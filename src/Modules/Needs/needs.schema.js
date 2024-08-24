@@ -50,3 +50,18 @@ export const GeneralSchema = {
     })
   }),
 }
+//-----------------------------------
+// check familyId in query
+
+export const checkFamilyIdInQuery = {
+  query: Joi.object({
+    familyId: Joi.string()
+      .custom(objectIdValidation, "Object ID Validation")
+      .required()
+      .messages({
+        "any.required": "Family ID is required",
+        "string.base": "Family ID must be a string",
+        "string.pattern": "Family ID must be a valid ObjectId",
+      }),
+  }),
+}
