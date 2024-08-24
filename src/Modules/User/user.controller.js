@@ -15,6 +15,19 @@ import Family from "../../../DB/Models/family.model.js";
 */
 
 export const addUser = async (req, res, next) => {
+  // check status online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  // destruct data from body
   const {
     firstName,
     secondName,
@@ -49,6 +62,7 @@ export const addUser = async (req, res, next) => {
     gender,
     comment,
     familyId: family._id,
+    addedBy: req.authUser._id,
   });
   const savedUser = await newUser.save();
   return res
@@ -64,6 +78,18 @@ export const addUser = async (req, res, next) => {
 */
 
 export const getAllUser = async (req, res) => {
+  // check status online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
   const user = await User.find();
   return res.status(200).json({ count: user.length, user });
 };
@@ -77,6 +103,19 @@ export const getAllUser = async (req, res) => {
 */
 
 export const getUserById = async (req, res, next) => {
+  // check status online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  // find user by id
   const { id } = req.params;
   const user = await User.findById(id);
   if (!user) {
@@ -98,6 +137,19 @@ export const getUserById = async (req, res, next) => {
 */
 
 export const deleteUserById = async (req, res, next) => {
+  // check status online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  // destruct id from params
   const { id } = req.params;
   const deletedUser = await User.findByIdAndDelete(id);
   if (!deletedUser) {
@@ -119,6 +171,19 @@ export const deleteUserById = async (req, res, next) => {
 */
 
 export const updateUserById = async (req, res, next) => {
+  // check status online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  // destruct id from params
   const { id } = req.params;
   const user = await User.findById(id);
   if (!user) {
