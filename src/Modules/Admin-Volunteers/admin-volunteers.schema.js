@@ -155,3 +155,86 @@ export const generalSchemaCheckOnlyToken = {
     ...generalRules.headers,
   }),
 };
+//------------------------------------
+
+
+/*
+ * schema update user
+ * check validation of the new user data from body
+ * check token in header
+ */
+
+export const updateUserSchema = {
+  body: Joi.object({
+    firstName: Joi.string().min(3).max(15).messages({
+      "string.min": "firstName should have a minimum length of 3 characters",
+      "string.max": "firstName should have a maximum length of 15 characters",
+      "any.required": "firstName is required",
+      "string.base": "firstName must be a string",
+    }),
+    secondName: Joi.string().min(3).messages({
+      "string.min": "secondName must be at least 3 characters long",
+      "string.base": "secondName must be a string",
+    }),
+    thirdName: Joi.string().min(3).messages({
+      "string.min": "thirdName must be at least 3 characters long",
+      "string.base": "thirdName must be a string",
+    }),
+    fourthName: Joi.string().min(3).messages({
+      "string.min": "fourthName must be at least 3 characters long",
+      "string.base": "fourthName must be a string",
+    }),
+    SSN: Joi.string().pattern(/^\d+$/).max(14).messages({
+      "string.base": "SSN must be a string",
+      "string.pattern.base": "SSN must only contain digits",
+      "string.max": "SSN must be at most 14 characters long",
+    }),
+    age: Joi.number().messages({
+      "number.base": "age must be a number",
+    }),
+    // enum values: male, female
+    gender: Joi.string().valid("male", "female").messages({
+      "string.base": "gender must be a string",
+      "string.valid": "gender must be male or female",
+    }),
+    email: Joi.string()
+      .email({
+        minDomainSegments: 2,
+        maxDomainSegments: 4,
+        tlds: { allow: ["com", "net", "org"] },
+      })
+      .messages({
+        "string.email": "Email is not valid",
+        "any.required": "Email is required",
+        "string.base": "Email must be a string",
+      }),
+    DOB: Joi.date().iso().messages({
+      "date.base": "User birthDate is not valid",
+      "date.format":
+        "User birthDate must be in ISO 8601 date format (YYYY-MM-DD)",
+    }),
+    mobileNumber: Joi.string()
+      .pattern(/^(\+20|0)?1[0125]\d{8}$/)
+      .messages({
+        "string.pattern.base": "Mobile Number is Valid",
+        "any.required": "You need to provide a mobile number",
+        "string.base": "mobile number must be a string",
+      }),
+    password: Joi.forbidden().messages({
+      "any.unknown": "User Password is not allowed to be updated",
+    }),
+    role: Joi.forbidden().messages({
+      "any.unknown": "User Role is not allowed to be updated",
+    }),
+    status: Joi.string().valid("online", "offline").messages({
+      "any.only": "Status must be either online or offline",
+    }),
+  }),
+  headers: Joi.object({
+    token: Joi.string().required().messages({
+      "string.base": "Token must be a string",
+      "any.required": "Token is required",
+    }),
+    ...generalRules.headers,
+  }),
+};

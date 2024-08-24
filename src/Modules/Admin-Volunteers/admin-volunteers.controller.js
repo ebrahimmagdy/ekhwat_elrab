@@ -285,3 +285,149 @@ export const logOut = async (req, res, next) => {
 
   return res.status(200).json({ message: "LogOut Successful" });
 };
+
+//-------------------------------------------------
+
+// Update account.
+
+/**
+ * answer:
+ * after authentication
+ * 1. check user online
+ * 2. Destructure firstName, lastName, email, mobileNumber, recoveryEmail, DOB from the body
+ * 3. if update email or mobile number, Check email and mobile number uniqueness in all data
+ * 4. If the email is updated, create new token and send verification email to active email
+ * 5. If the email is updated, set isConfirmed to false and status to offline, then prompt the user to log in again
+ * 6. Save the updated data
+ * 7. Do not update password or role
+ * 8. return updated data
+ */
+
+export const updateAccount = async (req, res, next) => {
+  // Check if the user is online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "update account API"
+      )
+    );
+  }
+
+  // Destructure firstName, lastName, email, mobileNumber, recoveryEmail, DOB from the request body
+  const {
+    firstName,
+    secondName,
+    thirdName,
+    fourthName,
+    email,
+    SSN,
+    age,
+    gender,
+    DOB,
+    mobileNumber,
+  } = req.body;
+
+  // Check email or mobile number uniqueness
+  const existingUser = await Admin_Volunteers.findOne({
+    $or: [{ email }, { mobileNumber }],
+  });
+  // If an existing user with the same email or mobile number is found, return an error
+  if (existingUser) {
+    return next(
+      new ErrorClass(
+        "Email or Mobile Number already exists",
+        400,
+        "Email or Mobile Number already exists",
+        "update account API"
+      )
+    );
+  }
+
+  // If the email is updated, send a verification email
+  if (email && email !== req.authUser.email) {
+    // Update isConfirmed to false and status to offline
+    const userInstance = await Admin_Volunteers.findByIdAndUpdate(
+      req.authUser._id,
+      {
+        isConfirmed: false,
+        status: "offline",
+      },
+      { new: true }
+    );
+    // Generate token
+    const token = jwt.sign(
+      { _id: userInstance._id },
+      process.env.CONFIRMATION_SECRET,
+      { expiresIn: "10m" }
+    );
+
+    // Create confirmation link
+    const confirmationLink = `${req.protocol}://${req.headers.host}/admin-volunteers/confirm-email/${token}`;
+
+    // Send email
+    const isEmailSent = await sendEmailService({
+      to: email,
+      subject: "Please confirm your email",
+      textMessage: "Please confirm your email",
+      htmlMessage: `<a href="${confirmationLink}">Click here to confirm your email</a>`,
+    });
+
+    // If the email was not sent, return an error
+    if (isEmailSent.rejected.length) {
+      return next(
+        new ErrorClass(
+          "Email Not Sent",
+          400,
+          "Email Not Sent",
+          email,
+          "update account API"
+        )
+      );
+    }
+  }
+
+  //  new variable contain user data
+  const user = req.authUser;
+  // check data is send or not (such new instance)
+  if (firstName) user.firstName = firstName;
+  if (secondName) user.secondName = secondName;
+  if (thirdName) user.thirdName = thirdName;
+  if (fourthName) user.fourthName = fourthName;
+  if (email) user.email = email;
+  if (mobileNumber) user.mobileNumber = mobileNumber;
+
+  if (DOB) user.DOB = DOB;
+  // change username if find firstName and lastName
+  const nameParts = [
+    firstName || user.firstName,
+    secondName || user.secondName,
+    thirdName || user.thirdName,
+    fourthName || user.fourthName,
+  ];
+  user.fullName = nameParts.join(" ");
+  if (SSN) {
+    if (user.SSN !== SSN) {
+      const checkSSN = await Admin_Volunteers.findOne({ SSN });
+      if (checkSSN) {
+        return next(
+          new ErrorClass("User already exist", 400, "SSN", "Update User API")
+        );
+      }
+      user.SSN = SSN;
+    }
+  }
+  if (age) {
+    user.age = age;
+  }
+  if (gender) {
+    user.gender = gender;
+  }
+
+  // Save the updated user data
+  const updatedUser = await user.save();
+  // Return success response
+  return res.status(200).json({ message: "Update Successful", updatedUser });
+};
