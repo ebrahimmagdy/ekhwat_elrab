@@ -139,3 +139,19 @@ export const SignInSchema = {
       }),
   }).xor("email", "mobileNumber"),
 };
+//--------------------------
+
+/**
+ * generalSchemaCheckOnlyToken schema to validate
+  - token in header
+ */
+
+export const generalSchemaCheckOnlyToken = {
+  headers: Joi.object({
+    token: Joi.string().required().messages({
+      "string.base": "Token must be a string",
+      "any.required": "Token is required",
+    }),
+    ...generalRules.headers,
+  }),
+};

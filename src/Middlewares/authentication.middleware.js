@@ -19,7 +19,7 @@ export const authenticate = () => {
       );
     }
     // check if token starts with prefix
-    if (!token.startsWith(process.env.PREFIX_SECRET)) {
+    if (!token.startsWith(process.env.SECRET_PREFIX)) {
       return next(new ErrorClass("Invalid token", 400, "Invalid token"));
     }
     // retrieve original token after adding the prefix
