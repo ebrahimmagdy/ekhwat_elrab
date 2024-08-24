@@ -2,7 +2,7 @@ import { Router } from "express";
 import * as admin_volunteersController from "./admin-volunteers.controller.js";
 import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
 import { validationMiddleware } from "../../Middlewares/validation.middleware.js";
-import { generalSchemaCheckOnlyToken, profileSchema, SignInSchema, SignUpSchema, updateUserSchema } from "./admin-volunteers.schema.js";
+import { generalSchemaCheckOnlyToken, profileSchema, SignInSchema, SignUpSchema, updatePasswordSchema, updateUserSchema } from "./admin-volunteers.schema.js";
 import { authenticate } from "../../Middlewares/authentication.middleware.js";
 import { authorizationMiddleware } from "../../Middlewares/authorization.middleware.js";
 
@@ -73,6 +73,13 @@ router.delete(
   errorHandler(authenticate()),
   errorHandler(validationMiddleware(generalSchemaCheckOnlyToken)),
   errorHandler(admin_volunteersController.deleteUser)
+);
+// api update user password
+router.patch(
+  "/updatePassword",
+  errorHandler(authenticate()),
+  errorHandler(validationMiddleware(updatePasswordSchema)),
+  errorHandler(admin_volunteersController.updatePassword)
 );
 
 export default router
