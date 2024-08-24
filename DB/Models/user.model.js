@@ -71,6 +71,11 @@ const userSchema = new mongoose.Schema(
       ref: "Family",
       required: true,
     },
+    addedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Admin_Volunteers",
+      required: true,
+    },
   },
   {
     timestamps: true,

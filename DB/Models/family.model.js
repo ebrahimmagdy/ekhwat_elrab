@@ -24,6 +24,10 @@ const familySchema = new mongoose.Schema(
       trim: true,
       minLength: 3,
     },
+    addedBy: {
+      type: Schema.Types.ObjectId,
+      ref: "Admin_Volunteers",
+      required: true,},
    
   },
   {

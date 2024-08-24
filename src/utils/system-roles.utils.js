@@ -1,8 +1,7 @@
 // system roles (admin and volunteers)
 export const systemRoles = {
   ADMIN: "admin",
-  VOLUNTEERS: "volunteers",
-
+  VOLUNTEERS: "volunteer",
 };
 
 const { ADMIN, VOLUNTEERS } = systemRoles;

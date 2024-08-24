@@ -91,7 +91,7 @@ export const SignUpSchema = {
       .valid(...Object.values(systemRoles))
       .required()
       .messages({
-        "any.only": "Role must be one of admin or volunteers",
+        "any.only": "Role must be one of admin or volunteer",
         "any.required": "Role is required",
       }),
     status: Joi.string().valid("online", "offline").messages({
