@@ -2,6 +2,7 @@ import { ErrorClass } from "../../utils/error-class.utils.js";
 
 import User from "../../../DB/Models/user.model.js";
 import Family from "../../../DB/Models/family.model.js";
+import Need from "../../../DB/Models/need.model.js";
 // add user
 
 /*
@@ -157,6 +158,8 @@ export const deleteUserById = async (req, res, next) => {
       new ErrorClass("User not found", 400, "userId", "Delete User API")
     );
   }
+  // delete needs related to user
+  await Need.deleteMany({ member: deletedUser._id });
   return res.status(200).json({ message: "Delete User Success", deletedUser });
 };
 //--------------------------
