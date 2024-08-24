@@ -1,7 +1,8 @@
 
-// add resource schema validation joi
 
 import Joi from "joi";
+import { objectIdValidation } from "../../utils/general-rules.utils.js";
+// add resource schema validation joi
 
 export const AddResourceSchema = {
     body: Joi.object({
@@ -17,5 +18,20 @@ export const AddResourceSchema = {
             "string.base": "type must be a string",
             "any.required": "type is required",
         }),
+    }),
+}
+//-----------------------------
+//general schema check id in params
+
+export const GeneralSchema = {
+    params: Joi.object({
+        id: Joi.string()
+            .custom(objectIdValidation, "Object ID Validation")
+            .required()
+            .messages({
+                "any.required": "Resource ID is required",
+                "string.base": "Resource ID must be a string",
+                "string.pattern": "Resource ID must be a valid ObjectId",
+            }),
     }),
 }

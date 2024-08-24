@@ -72,3 +72,32 @@ export const getAllResource = async (req, res, next) => {
   return res.status(200).json({count : resources.length , resources });
 }
 
+//------------------------------
+// get single resource by id
+
+export const getResourceById = async (req, res, next) => {
+  // check user online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  // find  resource by id
+  const resource = await Resource.findById(req.params.id);
+
+  // check resource exist
+  if (!resource) {
+    return next(
+      new ErrorClass("Resource not found", 404, "id", "get single resource API")
+    );
+  }
+
+  // return resource
+  return res.status(200).json({ resource });
+};
