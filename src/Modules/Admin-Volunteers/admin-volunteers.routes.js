@@ -2,7 +2,7 @@ import { Router } from "express";
 import * as admin_volunteersController from "./admin-volunteers.controller.js";
 import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
 import { validationMiddleware } from "../../Middlewares/validation.middleware.js";
-import { generalSchemaCheckOnlyToken, profileSchema, SignInSchema, SignUpSchema, updatePasswordSchema, updateUserSchema } from "./admin-volunteers.schema.js";
+import { forgetPasswordSchema, generalSchemaCheckOnlyToken, profileSchema, resetPasswordSchema, SignInSchema, SignUpSchema, updatePasswordSchema, updateUserSchema } from "./admin-volunteers.schema.js";
 import { authenticate } from "../../Middlewares/authentication.middleware.js";
 import { authorizationMiddleware } from "../../Middlewares/authorization.middleware.js";
 
@@ -82,4 +82,18 @@ router.patch(
   errorHandler(admin_volunteersController.updatePassword)
 );
 
+
+// forget password
+router.post(
+  "/forgetPassword",
+  errorHandler(validationMiddleware(forgetPasswordSchema)),
+  errorHandler(admin_volunteersController.forgetPassword)
+);
+
+// reset password
+router.post(
+  "/resetPassword",
+  errorHandler(validationMiddleware(resetPasswordSchema)),
+  errorHandler(admin_volunteersController.resetPassword)
+)
 export default router
