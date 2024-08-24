@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as needController from "./needs.controller.js";
-import { AddNeedsSchema, checkFamilyIdInQuery, GeneralSchema } from "./needs.schema.js";
+import { AddNeedsSchema, checkFamilyIdInQuery, GeneralSchema, UpdateNeedsSchema } from "./needs.schema.js";
 import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
 import { authenticate } from "../../Middlewares/authentication.middleware.js";
 import { authorizationMiddleware } from "../../Middlewares/authorization.middleware.js";
@@ -55,5 +55,13 @@ router.delete(
   errorHandler(authorizationMiddleware("admin")),
   errorHandler(validationMiddleware(checkFamilyIdInQuery)),
   errorHandler(needController.deleteAllNeedsByFamily)
+)
+// update need by id
+router.put(
+  "/updateNeedById/:id",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware("admin")),
+  errorHandler(validationMiddleware(UpdateNeedsSchema)),
+  errorHandler(needController.updateNeedById)
 )
 export default router

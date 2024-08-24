@@ -226,3 +226,65 @@ export const deleteAllNeedsByFamily = async (req, res, next) => {
     .status(200)
     .json({ message: "Delete All Need Success", deletedNeeds });
 };
+//---------------------------------------------
+// update need by id
+
+export const updateNeedById = async (req, res, next) => {
+  // check user online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  const { id } = req.params;
+  // find need by id
+  const needData = await Need.findById(id);
+  if (!needData) {
+    return next(
+      new ErrorClass("Need not found", 400, "needId", "Update Need By Id API")
+    );
+  }
+  // destruct data from query
+  const {member} = req.query
+  // check member found
+  if(member){
+      const memberData = await Member.findOn({ _id: member , familyId: needData.familyId});
+      // check member exist
+      if(!memberData){
+          return next(
+            new ErrorClass("Member not found In Family", 400, "memberId", "Update Need By Id API")
+          );
+      }
+
+      needData.member = member
+  }
+  // destruct data from req.body
+  const { need, quantity, price } = req.body;
+
+  // update need
+  if (need) {
+    needData.need = need;
+  }
+  if (quantity) {
+    needData.quantity = quantity;
+  }
+  if (price) {
+    needData.price = price;
+  
+  }
+
+  // save need
+  const updatedNeed = await needData.save();
+  // return update need success
+  return res
+    .status(200)
+    .json({ message: "Update Need Success", updatedNeed });
+
+};
+

@@ -19,6 +19,7 @@ export const AddNeedsSchema = {
     }),
     price: Joi.number().required().messages({
       "string.base": "price must be a number",
+      "any.required": "quantity is required",
     }),
   }),
   query: Joi.object({
@@ -39,17 +40,20 @@ export const AddNeedsSchema = {
   }),
 };
 //---------------------------
-//general schema check id in params 
+//general schema check id in params
 
 export const GeneralSchema = {
   params: Joi.object({
-    id: Joi.string().custom(objectIdValidation, "Object ID Validation").required().messages({
-      "string.base": "id must be a string",
-      "string.pattern": "id must be a valid ObjectId",
-      "any.required": "id is required",
-    })
+    id: Joi.string()
+      .custom(objectIdValidation, "Object ID Validation")
+      .required()
+      .messages({
+        "string.base": "id must be a string",
+        "string.pattern": "id must be a valid ObjectId",
+        "any.required": "id is required",
+      }),
   }),
-}
+};
 //-----------------------------------
 // check familyId in query
 
@@ -64,4 +68,38 @@ export const checkFamilyIdInQuery = {
         "string.pattern": "Family ID must be a valid ObjectId",
       }),
   }),
-}
+};
+//------------------------------------------
+//update
+export const UpdateNeedsSchema = {
+  body: Joi.object({
+    need: Joi.string().messages({
+      "string.base": "name must be a string",
+    }),
+    quantity: Joi.number().messages({
+      "string.base": "quantity must be a number",
+    }),
+    price: Joi.number().messages({
+      "string.base": "price must be a number",
+    }),
+  }),
+  query: Joi.object({
+    member: Joi.string()
+      .custom(objectIdValidation, "Object ID Validation")
+      .messages({
+        "string.base": "member must be a string",
+        "string.pattern": "member must be a valid ObjectId",
+      }),
+  }),
+
+  params: Joi.object({
+    id: Joi.string()
+      .custom(objectIdValidation, "Object ID Validation")
+      .required()
+      .messages({
+        "string.base": "id must be a string",
+        "string.pattern": "id must be a valid ObjectId",
+        "any.required": "id is required",
+      }),
+  }),
+};
