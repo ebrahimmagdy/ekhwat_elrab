@@ -13,6 +13,10 @@ router.post(
     validationMiddleware(AddUserSchema),
     errorHandler(userController.addUser)
 );
-
+//get all user 
+router.get(
+    "/getAllUser",
+    errorHandler(userController.getAllUser)
+)
 
 export default router;

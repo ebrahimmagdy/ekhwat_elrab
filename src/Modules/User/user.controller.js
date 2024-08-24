@@ -53,3 +53,16 @@ export const addUser = async (req, res, next) => {
     .status(200)
     .json({ message: "User created successfully", savedUser });
 };
+//------------------------
+//get all User 
+
+/*
+1- find all u
+2- return all family
+*/
+
+export const getAllUser = async (req, res) => {
+  const user = await User.find();
+  return res.status(200).json({ count: user.length, user });
+};
+//-----------------------
