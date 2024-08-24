@@ -176,3 +176,53 @@ export const deleteNeedById = async (req, res, next) => {
   // return delete need success
   return res.status(200).json({ message: "Delete Need Success", deletedNeed });
 };
+//---------------------------------------
+// delete all needs by family id
+
+export const deleteAllNeedsByFamily = async (req, res, next) => {
+  // check user online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  // destruct data from query
+  const { familyId } = req.query;
+  // check family exist
+  const family = await Family.findById(familyId);
+  if (!family) {
+    return next(
+      new ErrorClass(
+        "Family not found",
+        400,
+        "familyId",
+        "Delete All Need By Family API"
+      )
+    );
+  }
+  // delete all needs
+  const deletedNeeds = await Need.deleteMany({ familyId });
+
+  // check need exist
+  if (!deletedNeeds) {
+    return next(
+      new ErrorClass(
+        "Need not found",
+        400,
+        "familyId",
+        "Delete All Need By Family API"
+      )
+    );
+  }
+
+  // return delete need success
+  return res
+    .status(200)
+    .json({ message: "Delete All Need Success", deletedNeeds });
+};

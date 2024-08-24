@@ -48,4 +48,12 @@ router.delete(
   errorHandler(validationMiddleware(GeneralSchema)),
   errorHandler(needController.deleteNeedById)
 )
+// delete all needs by family
+router.delete(
+  "/deleteAllNeedsByFamily",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware("admin")),
+  errorHandler(validationMiddleware(checkFamilyIdInQuery)),
+  errorHandler(needController.deleteAllNeedsByFamily)
+)
 export default router
