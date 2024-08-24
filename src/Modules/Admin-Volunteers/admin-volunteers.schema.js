@@ -99,3 +99,43 @@ export const SignUpSchema = {
     }),
   }),
 };
+//--------------
+
+/* user schema validation all input before the arrive to api signIn user
+  the validation only data in body
+*/
+export const SignInSchema = {
+  body: Joi.object({
+    email: Joi.string()
+      .email({
+        minDomainSegments: 2,
+        maxDomainSegments: 4,
+        tlds: { allow: ["com", "net", "org"] },
+      })
+      .messages({
+        "string.email": "Email is not valid",
+        "string.base": "Email must be a string",
+        "any.required": "Email is required",
+      }),
+    mobileNumber: Joi.string()
+      .pattern(/^(\+20|0)?1[0125]\d{8}$/)
+      .messages({
+        "string.pattern.base": "Mobile Number is Valid",
+        "any.required": "You need to provide a mobile number",
+        "string.base": "mobile number must be a string",
+      }),
+    
+    password: Joi.string()
+      .pattern(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+      )
+      .required()
+      .messages({
+        "string.pattern.base":
+          "Password must have at least one lowercase letter, one uppercase letter, one number and one special character",
+        "any.required": "You need to provide a password",
+        "string.min": "Password should have a minimum length of 3 characters",
+        "string.base": "Password must be a string",
+      }),
+  }).xor("email", "mobileNumber"),
+};

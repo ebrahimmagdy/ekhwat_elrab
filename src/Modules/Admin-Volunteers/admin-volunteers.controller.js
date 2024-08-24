@@ -177,3 +177,72 @@ export const confirmEmail = async (req, res, next) => {
     return next(new ErrorClass("Invalid token", 400, "Invalid token"));
   }
 };
+//----------------------------------------------------
+// 2-signIn User
+
+/*
+ * answer:
+ * after validation
+  1- send user data if login in body
+  2- check user found email or mobile number or recovery email and password
+  3- check user active email
+  4- create token
+  5- update status user from offline to online
+  6- if user found return token 
+*/
+export const signIn = async (req, res, next) => {
+  // destruct data from req.body
+  const { email, password, mobileNumber } = req.body;
+
+  // Check if the user exists
+  const user = await Admin_Volunteers.findOne({
+    $or: [{ email }, { mobileNumber }],
+  });
+  if (!user) {
+    return next(
+      new ErrorClass(
+        "Email or Mobile Number or Password is incorrect",
+        400,
+        { email, password, mobileNumber },
+        "SignIn API"
+      )
+    );
+  }
+  // check email is active by comfirm email
+  if (user.isConfirmed === false) {
+    return next(
+      new ErrorClass(
+        "Please Frist Active Your Email ",
+        400,
+        user.email,
+        "SignIn API"
+      )
+    );
+  }
+
+  // Verify the password
+  const isPasswordValid = compareSync(password, user.password);
+  if (!isPasswordValid) {
+    return next(
+      new ErrorClass(
+        "Email or Mobile Number or Password or  Recovery Email is incorrect",
+        400,
+        { email, password, mobileNumber, recoveryEmail },
+        "SignIn API"
+      )
+    );
+  }
+
+  // Sign a JWT token with user's ID and a secret key (make sure to use a strong secret)
+  const token = jwt.sign({ userId: user._id }, process.env.LOGIN_SECRET, {
+    expiresIn: "1h",
+  }); // Token expires in 1 hour
+
+  // Update status from online
+  const updatedUser = await Admin_Volunteers.findByIdAndUpdate(user._id, {
+    status: "online",
+  });
+
+  return res.status(200).json({ token });
+};
+
