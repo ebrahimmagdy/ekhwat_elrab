@@ -50,3 +50,25 @@ export const addResource = async (req, res, next) => {
     .status(200)
     .json({ message: "Resource created successfully", savedResource });
 };
+//-------------------------------
+//get all resource
+
+export const getAllResource = async (req, res, next) => {
+  // check user online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  // find all resource
+  const resources = await Resource.find();
+  // return all resource
+  return res.status(200).json({count : resources.length , resources });
+}
+

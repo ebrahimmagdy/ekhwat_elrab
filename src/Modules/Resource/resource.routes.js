@@ -18,5 +18,11 @@ router.post(
   errorHandler(validationMiddleware(AddResourceSchema)),
   errorHandler(resourceController.addResource)
 );
-
+// get all resource
+router.get(
+  "/getAllResource",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware(["admin", "volunteer"])),
+  errorHandler(resourceController.getAllResource)
+)
 export default router;
