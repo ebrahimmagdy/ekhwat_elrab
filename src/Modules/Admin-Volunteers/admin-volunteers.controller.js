@@ -464,3 +464,29 @@ export const getAccountData = async (req, res, next) => {
   }
   return res.status(200).json({ userData });
 };
+//------------------------------------------
+//get all users
+
+/*
+1- check token and user online
+2- get all users
+3- return response
+*/
+
+export const getAllUsers = async (req, res, next) => {
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "get all users API"
+      )
+    );
+  }
+
+  const users = await Admin_Volunteers.find();
+
+  return res.status(200).json({ count: users.length, users });
+};
+

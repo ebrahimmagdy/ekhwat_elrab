@@ -4,6 +4,7 @@ import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
 import { validationMiddleware } from "../../Middlewares/validation.middleware.js";
 import { generalSchemaCheckOnlyToken, SignInSchema, SignUpSchema, updateUserSchema } from "./admin-volunteers.schema.js";
 import { authenticate } from "../../Middlewares/authentication.middleware.js";
+import { authorizationMiddleware } from "../../Middlewares/authorization.middleware.js";
 
 // signUp
 
@@ -50,7 +51,14 @@ router.get(
   errorHandler(admin_volunteersController.getAccountData)
 );
 
-
+// get user api if user not login
+router.get(
+  "/getAllUsers",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware("admin")),
+  errorHandler(validationMiddleware(generalSchemaCheckOnlyToken)),
+  errorHandler(admin_volunteersController.getAllUsers)
+);
 
 
 export default router
