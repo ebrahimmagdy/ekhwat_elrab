@@ -16,7 +16,6 @@ const resourceSchema = new mongoose.Schema(
       required: true,
       unique: true,
       trim: true,
-      minLength: 3,
     },
     quantity: {
       type: Number,
