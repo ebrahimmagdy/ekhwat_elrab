@@ -1,3 +1,5 @@
+import { ErrorClass } from "../../utils/error-class.utils.js";
+
 import User from "../../../DB/Models/user.model.js";
 import Family from "../../../DB/Models/family.model.js";
 // add user
@@ -23,7 +25,7 @@ export const addUser = async (req, res, next) => {
     gender,
     comment,
   } = req.body;
-  
+
   const family = await Family.findById(req.params.familyId);
   if (!family) {
     return next(
@@ -54,7 +56,7 @@ export const addUser = async (req, res, next) => {
     .json({ message: "User created successfully", savedUser });
 };
 //------------------------
-//get all User 
+//get all User
 
 /*
 1- find all user
@@ -83,4 +85,86 @@ export const getUserById = async (req, res, next) => {
     );
   }
   return res.status(200).json({ user });
-}
+};
+
+//--------------------------------
+// delete user by id
+
+/*
+1- find user by id
+2- check user exist
+3- delete user
+4- return delete user success
+*/
+
+export const deleteUserById = async (req, res, next) => {
+  const { id } = req.params;
+  const deletedUser = await User.findByIdAndDelete(id);
+  if (!deletedUser) {
+    return next(
+      new ErrorClass("User not found", 400, "userId", "Delete User API")
+    );
+  }
+  return res.status(200).json({ message: "Delete User Success", deletedUser });
+};
+//--------------------------
+//update User
+
+/*
+1- find user by id
+2- check user exist
+3- destruct data from req.body
+4- update user
+5- return update user success
+*/
+
+export const updateUserById = async (req, res, next) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return next(
+      new ErrorClass("User not found", 400, "userId", "Update User API")
+    );
+  }
+  const { firstName, secondName, thirdName, fourthName, SSN, age, gender } =
+    req.body;
+  if (firstName) {
+    user.firstName = firstName;
+  }
+  if (secondName) {
+    user.secondName = secondName;
+  }
+  if (thirdName) {
+    user.thirdName = thirdName;
+  }
+  if (fourthName) {
+    user.fourthName = fourthName;
+  }
+  const nameParts = [
+    firstName || user.firstName,
+    secondName || user.secondName,
+    thirdName || user.thirdName,
+    fourthName || user.fourthName,
+  ];
+  user.fullName = nameParts.join(" ");
+  if (SSN) {
+    if (user.SSN !== SSN) {
+      const checkSSN = await User.findOne({ SSN });
+      if (checkSSN) {
+        return next(
+          new ErrorClass("User already exist", 400, "SSN", "Update User API")
+        );
+      }
+      user.SSN = SSN;
+    }
+  }
+
+  if (age) {
+    user.age = age;
+  }
+  if (gender) {
+    user.gender = gender;
+  }
+  const updatedUser = await user.save();
+  return res.status(200).json({ message: "Update User Success", updatedUser });
+};
