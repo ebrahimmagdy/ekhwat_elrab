@@ -12,7 +12,7 @@
 */
 
 import mongoose from "mongoose";
-import { systemRoles } from "../../src/utils/system-roles.utils";
+import { systemRoles } from "../../src/utils/system-roles.utils.js";
 
 const { Schema, model } = mongoose;
 
@@ -70,7 +70,6 @@ const admin_volunteersSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
- 
     DOB: {
       type: Date,
       default: Date.now,
