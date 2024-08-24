@@ -547,3 +547,42 @@ export const getProfileData = async (req, res, next) => {
   return res.status(200).json({ userData });
 };
 
+//-----------------------------
+
+// delete account
+
+/**
+ * answer:
+ * after authentication and validation
+ *  1- check user online
+ *  2- delete user
+ *  3- if deleted return response deleted else return error
+ *  4- delete company related to user
+ *  5- delete job related to user
+ *  6- delete application related to user
+ *  7- return deleted user
+ */
+
+export const deleteUser = async (req, res, next) => {
+  // check status online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  // delete user
+  const deletedUser = await Admin_Volunteers.findByIdAndDelete(req.authUser._id);
+  // user not found
+  if (!deletedUser) {
+    return next(new ErrorClass("User not found", 404, "delete user API"));
+  }
+  return res
+    .status(200)
+    .json({ message: "User deleted successfully", deletedUser });
+};

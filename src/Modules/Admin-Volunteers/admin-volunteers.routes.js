@@ -67,6 +67,12 @@ router.get(
   errorHandler(validationMiddleware(profileSchema)),
   errorHandler(admin_volunteersController.getProfileData)
 );
-
+// delete user api
+router.delete(
+  "/deleteAccount",
+  errorHandler(authenticate()),
+  errorHandler(validationMiddleware(generalSchemaCheckOnlyToken)),
+  errorHandler(admin_volunteersController.deleteUser)
+);
 
 export default router
