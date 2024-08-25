@@ -1,5 +1,6 @@
 // add resource
 
+import Expiration from "../../../DB/Models/expiration.model.js";
 import Resource from "../../../DB/Models/resource.model.js";
 import { ErrorClass } from "../../utils/error-class.utils.js";
 
@@ -125,6 +126,8 @@ export const deleteResourceById = async (req, res, next) => {
       new ErrorClass("Resource not found", 404, "id", "get single resource API")
     );
   }
+  // after delete resource deleted related all expirtaion 
+  await Expiration.deleteMany({ resourceId: req.params.id });
   return res
     .status(200)
     .json({ message: "Resource deleted successfully", deleteResource });
