@@ -73,3 +73,14 @@ export const UpdateExpirationSchema = {
     }),
   }),
 };
+// -----------------
+// check numberOfDay from query
+export const CheckNumberOfDay = {
+    
+    query: Joi.object({
+      numberOfDay: Joi.number().required().messages({
+        "number.base": "numberOfDay must be a number",
+        "any.required": "numberOfDay is required",
+      }),
+    }),
+}

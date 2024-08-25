@@ -3,7 +3,7 @@ import { Router } from "express";
 
 // controller
 import * as expirationController from "./expiration.controller.js";
-import { AddExpirationSchema, GeneralSchema, UpdateExpirationSchema } from "./expiration.schema.js";
+import { AddExpirationSchema, CheckNumberOfDay, GeneralSchema, UpdateExpirationSchema } from "./expiration.schema.js";
 import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
 import { validationMiddleware } from "../../Middlewares/validation.middleware.js";
 import { authenticate } from "../../Middlewares/authentication.middleware.js";
@@ -49,5 +49,13 @@ router.put(
   errorHandler(authorizationMiddleware("admin")),
   errorHandler(validationMiddleware(UpdateExpirationSchema)),
   errorHandler(expirationController.updateExpirationById)
+);
+// get all expiration 
+router.get(
+  "/getAllExpiringByNumberOfDay",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware("admin")),
+  errorHandler(validationMiddleware(CheckNumberOfDay)),
+  errorHandler(expirationController.getAllExpiringByNumberOfDay)
 );
 export default router;
