@@ -44,3 +44,25 @@ export const addExpiration = async (req, res, next) => {
     return res.status(201).json({ expiration });
 
 }
+//----------------------------
+//get all expiration
+
+export const getAllExpiration = async (req, res, next) => {
+
+    // check user online
+    if (req.authUser.status !== "online") {
+        return next(
+            new ErrorClass(
+                "User must be online",
+                400,
+                "User must be online",
+                "delete user API"
+            )
+        );
+    }
+
+    // get all expiration   
+    const expiration = await Expiration.find();
+    return res.status(200).json({ count: expiration.length,expiration });
+
+}

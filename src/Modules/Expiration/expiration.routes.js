@@ -20,5 +20,13 @@ router.post(
   errorHandler(validationMiddleware(AddExpirationSchema)),
   errorHandler(expirationController.addExpiration)
 );
+// get all expiration
+router.get(
+  "/getAllExpiration",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware("admin")),
+  errorHandler(expirationController.getAllExpiration)
+);
+
 
 export default router
