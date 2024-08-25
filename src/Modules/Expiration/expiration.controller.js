@@ -136,3 +136,61 @@ export const deleteExpirationById = async (req, res, next) => {
     return res.status(200).json({message:"Delete Expiration Success", expiration });
 }
 //--------------------------------
+//update expiration by id
+
+export const updateExpirationById = async (req, res, next) => {
+
+    // check user online
+    if (req.authUser.status !== "online") {
+        return next(
+            new ErrorClass(
+                "User must be online",
+                400,
+                "User must be online",
+                "delete user API"
+            )
+        );
+    }
+
+    const { id } = req.params;
+
+    const expiration = await Expiration.findById(id);
+    if (!expiration) {
+        return next(
+            new ErrorClass(
+                "Expiration not found",
+                400,
+                "expirationId",
+                "update expiration by id API"
+            )
+        );
+    }
+    const { resourceId, quantity, expirationDate, startDate } = req.body;
+    if (resourceId) {
+      expiration.resourceId = resourceId;
+      // check resource exist
+      const resource = await Resource.findById(resourceId);
+      if (!resource) {
+        return next(
+          new ErrorClass(
+            "Resource not found",
+            400,
+            "resourceId",
+            "update expiration by id API"
+          )
+        );
+      }
+    }
+   
+    if (quantity) {
+        expiration.quantity = quantity;
+    }
+    if (expirationDate) {
+        expiration.expirationDate = expirationDate;
+    }
+    if (startDate) {
+        expiration.startDate = startDate;
+    }
+    await expiration.save();
+    return res.status(200).json({message:"Update Expiration Success", expiration });
+}
