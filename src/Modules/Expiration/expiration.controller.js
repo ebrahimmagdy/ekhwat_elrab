@@ -101,3 +101,38 @@ export const getExpirationById = async (req, res, next) => {
     return res.status(200).json({ expiration });
 
 }
+//----------------------------------
+//delete resource by id
+
+export const deleteExpirationById = async (req, res, next) => {
+
+    // check user online
+    if (req.authUser.status !== "online") {
+        return next(
+            new ErrorClass(
+                "User must be online",
+                400,
+                "User must be online",
+                "delete user API"
+            )
+        );
+    }
+
+    const { id } = req.params;
+
+    const expiration = await Expiration.findByIdAndDelete(id);
+
+    if (!expiration) {
+        return next(
+            new ErrorClass(
+                "Expiration not found",
+                400,
+                "expirationId",
+                "delete expiration by id API"
+            )
+        );
+    }
+
+    return res.status(200).json({message:"Delete Expiration Success", expiration });
+}
+//--------------------------------

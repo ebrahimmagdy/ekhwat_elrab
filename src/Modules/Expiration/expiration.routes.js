@@ -3,7 +3,7 @@ import { Router } from "express";
 
 // controller
 import * as expirationController from "./expiration.controller.js";
-import { AddExpirationSchema } from "./expiration.schema.js";
+import { AddExpirationSchema, GeneralSchema } from "./expiration.schema.js";
 import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
 import { validationMiddleware } from "../../Middlewares/validation.middleware.js";
 import { authenticate } from "../../Middlewares/authentication.middleware.js";
@@ -31,6 +31,15 @@ router.get(
   "/getExpirationById/:id",
   errorHandler(authenticate()),
   errorHandler(authorizationMiddleware("admin")),
+  errorHandler(validationMiddleware(GeneralSchema)),
   errorHandler(expirationController.getExpirationById)
 );
+// delete expiration by id
+router.delete(
+  "/deleteExpirationById/:id",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware("admin")),
+  errorHandler(validationMiddleware(GeneralSchema)),
+  errorHandler(expirationController.deleteExpirationById)
+)
 export default router;
