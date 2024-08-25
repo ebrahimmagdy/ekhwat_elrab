@@ -14,7 +14,7 @@ const { Schema, model } = mongoose;
 
 const expirationSchema = new mongoose.Schema(
   {
-    recourceId: {
+    resourceId: {
       type: Schema.Types.ObjectId,
       ref: "resource",
       required: true,
@@ -41,5 +41,6 @@ const expirationSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+const Expiration = mongoose.models.Expiration || model("Expiration", expirationSchema);
 
-export default model("expiration", expirationSchema);
+export default Expiration;
