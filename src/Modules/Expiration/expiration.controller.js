@@ -66,3 +66,38 @@ export const getAllExpiration = async (req, res, next) => {
     return res.status(200).json({ count: expiration.length,expiration });
 
 }
+//---------------------------------
+// get expiration by id
+
+export const getExpirationById = async (req, res, next) => {
+
+    // check user online
+    if (req.authUser.status !== "online") {
+        return next(
+            new ErrorClass(
+                "User must be online",
+                400,
+                "User must be online",
+                "delete user API"
+            )
+        );
+    }
+
+    const { id } = req.params;
+
+    const expiration = await Expiration.findById(id);
+
+    if (!expiration) {
+        return next(
+            new ErrorClass(
+                "Expiration not found",
+                400,
+                "expirationId",
+                "get expiration by id API"
+            )
+        );
+    }
+
+    return res.status(200).json({ expiration });
+
+}

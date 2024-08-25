@@ -1,4 +1,3 @@
-
 // router
 import { Router } from "express";
 
@@ -27,6 +26,11 @@ router.get(
   errorHandler(authorizationMiddleware("admin")),
   errorHandler(expirationController.getAllExpiration)
 );
-
-
-export default router
+// get expiration by id
+router.get(
+  "/getExpirationById/:id",
+  errorHandler(authenticate()),
+  errorHandler(authorizationMiddleware("admin")),
+  errorHandler(expirationController.getExpirationById)
+);
+export default router;

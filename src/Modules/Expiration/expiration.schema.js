@@ -31,3 +31,14 @@ export const AddExpirationSchema = {
       }),
   }),
 };
+//-------------------
+//general validation id in params
+
+export const GeneralSchema = {
+  params: Joi.object({
+    id: Joi.string().required().messages({
+      "string.base": "id must be a string",
+      "any.required": "id is required",
+    }),
+  }),
+}
