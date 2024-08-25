@@ -1,0 +1,1206 @@
+{
+	"info": {
+		"_postman_id": "38f1eaa3-7b9b-4bfa-808b-d3c6bd85f299",
+		"name": "ekhwat_elrab",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32953180"
+	},
+	"item": [
+		{
+			"name": "Family",
+			"item": [
+				{
+					"name": "Add Family",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MjAyNjksImV4cCI6MTcyNDUyMzg2OX0.MHuq1Rpppb0pH4kDTj2xUqdKQh-DOvUdSZzDwdL_4Os",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"familyName\":\"Merna Family\",\r\n    \"comment\" : \"family pear\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/family/addFamily",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"family",
+								"addFamily"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllFamily",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNhMTlmZTdiNDU1YWI1NjRiM2ViODEiLCJpYXQiOjE3MjQ1MjEwMjcsImV4cCI6MTcyNDUyNDYyN30.aas2ciVQ5RtGl3F9e0iHOBfSvhYsa2zymdnWdM_mGOo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/family/getAllFamily",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"family",
+								"getAllFamily"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFamilyById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNhMTlmZTdiNDU1YWI1NjRiM2ViODEiLCJpYXQiOjE3MjQ1MjEwMjcsImV4cCI6MTcyNDUyNDYyN30.aas2ciVQ5RtGl3F9e0iHOBfSvhYsa2zymdnWdM_mGOo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/family/getFamilyById/66ca177a2a9ed0ca38385560",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"family",
+								"getFamilyById",
+								"66ca177a2a9ed0ca38385560"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFamily",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNhMTlmZTdiNDU1YWI1NjRiM2ViODEiLCJpYXQiOjE3MjQ1MjEwMjcsImV4cCI6MTcyNDUyNDYyN30.aas2ciVQ5RtGl3F9e0iHOBfSvhYsa2zymdnWdM_mGOo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/family/deleteFamilyById/66c9dfb40e9f24abb42e55cb",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"family",
+								"deleteFamilyById",
+								"66c9dfb40e9f24abb42e55cb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateFamily",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNhMTlmZTdiNDU1YWI1NjRiM2ViODEiLCJpYXQiOjE3MjQ1MjEwMjcsImV4cCI6MTcyNDUyNDYyN30.aas2ciVQ5RtGl3F9e0iHOBfSvhYsa2zymdnWdM_mGOo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"familyName\":\"Hanna Family\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/family/updateFamilyById/66ca177a2a9ed0ca38385560",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"family",
+								"updateFamilyById",
+								"66ca177a2a9ed0ca38385560"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "addUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNhMTlmZTdiNDU1YWI1NjRiM2ViODEiLCJpYXQiOjE3MjQ1MjEwMjcsImV4cCI6MTcyNDUyNDYyN30.aas2ciVQ5RtGl3F9e0iHOBfSvhYsa2zymdnWdM_mGOo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"merna\",\r\n    \"secondName\":\"Bassem\",\r\n    \"thirdName\":\"Hanna\",\r\n    \"fourthName\":\"Nekhela\",\r\n    \"SSN\":\"12345678925845\",\r\n    \"age\":22,\r\n    \"gender\":\"female\"\r\n  } ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/addUser/66c9dfb40e9f24abb42e55cb",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"addUser",
+								"66c9dfb40e9f24abb42e55cb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNhMTlmZTdiNDU1YWI1NjRiM2ViODEiLCJpYXQiOjE3MjQ1MjEwMjcsImV4cCI6MTcyNDUyNDYyN30.aas2ciVQ5RtGl3F9e0iHOBfSvhYsa2zymdnWdM_mGOo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/getAllUser",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getAllUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNhMTlmZTdiNDU1YWI1NjRiM2ViODEiLCJpYXQiOjE3MjQ1MjEwMjcsImV4cCI6MTcyNDUyNDYyN30.aas2ciVQ5RtGl3F9e0iHOBfSvhYsa2zymdnWdM_mGOo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/getUserById/66c9e1d5e16cd289697387a9",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"getUserById",
+								"66c9e1d5e16cd289697387a9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUSerById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MzMxNjIsImV4cCI6MTcyNDUzNjc2Mn0.voJnyL1P7grPWrhRnaJ476LKo08ildroNiz5vAujQPU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/deleteUserById/66ca4ad5b0deb59cfda959c5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"deleteUserById",
+								"66ca4ad5b0deb59cfda959c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNhMTlmZTdiNDU1YWI1NjRiM2ViODEiLCJpYXQiOjE3MjQ1MjEwMjcsImV4cCI6MTcyNDUyNDYyN30.aas2ciVQ5RtGl3F9e0iHOBfSvhYsa2zymdnWdM_mGOo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"Kelories\"\r\n\r\n  } ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/updateUserById/66c9e21726fea6e9fe33bb47",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"updateUserById",
+								"66c9e21726fea6e9fe33bb47"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin_Volunteers",
+			"item": [
+				{
+					"name": "SignUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"Hanna\",\r\n    \"secondName\":\"Bassem\",\r\n    \"thirdName\":\"Hanna\",\r\n    \"fourthName\":\"Nekhela\",\r\n    \"SSN\":\"12345678295845\",\r\n    \"age\":23,\r\n    \"email\":\"pecit61836@amxyy.com\",\r\n    \"password\":\"Merna21@\",\r\n    \"mobileNumber\":\"01271364280\",\r\n    \"gender\":\"male\",\r\n    \"role\":\"volunteer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin-volunteers/signUp",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin-volunteers",
+								"signUp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"gepowek418@apifan.com\",\r\n    \"password\":\"Merna21@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin-volunteers/signIn",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin-volunteers",
+								"signIn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logOut",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MTMxMTUsImV4cCI6MTcyNDUxNjcxNX0.rwHKF2xxoaFbNqQsjOlOPK8GM1fqLEPamnVyZqR-CCE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin-volunteers/logOut",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin-volunteers",
+								"logOut"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletedAccount",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNhMDZiNzdhMWMwOWZiZmQwMWVkNWMiLCJpYXQiOjE3MjQ1MTY3NDIsImV4cCI6MTcyNDUyMDM0Mn0.1FP0B8jxaK9bhsyLhQSANVXjslFkLPw5cXE9gMxD0ZM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin-volunteers/deleteAccount",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin-volunteers",
+								"deleteAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAccountData",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MTU1MTQsImV4cCI6MTcyNDUxOTExNH0.uGgdrbdWUfvXJrZ7FAFkj8_ZduV4Bdz8ZstvXMgI4Yo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin-volunteers/getAccountData",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin-volunteers",
+								"getAccountData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProfileData",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNhMDZiNzdhMWMwOWZiZmQwMWVkNWMiLCJpYXQiOjE3MjQ1MTYxMTAsImV4cCI6MTcyNDUxOTcxMH0.t61uB5-Ns__ToUKV91jknqsxEpC15bxjO3IK0aQL2GU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin-volunteers/getProfileData/66ca06b77a1c09fbfd01ed5c",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin-volunteers",
+								"getProfileData",
+								"66ca06b77a1c09fbfd01ed5c"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "668b004a788ecbe22803ee48",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePassword",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MTc2OTEsImV4cCI6MTcyNDUyMTI5MX0.-KClOzs8SI7Hf_3MQYXMNsEcTGpx2F4iRACekHaIGAs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\":\"Merna21@\",\r\n    \"newPassword\":\"Merna@2112002\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin-volunteers/updatePassword",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin-volunteers",
+								"updatePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MTUxNjAsImV4cCI6MTcyNDUxODc2MH0.S7FlLCQLJPZ-E_uFVMlkTEpvKdX4W_cZpXGyAA0FYdQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"gepowek418@apifan.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin-volunteers/updateAccount",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin-volunteers",
+								"updateAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgetPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"gepowek418@apifan.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin-volunteers/forgetPassword",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin-volunteers",
+								"forgetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"gepowek418@apifan.com\",\r\n    \"otp\":\"188071\",\r\n    \"newPassword\":\"Merna21@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin-volunteers/resetPassword",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin-volunteers",
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MTU5NTMsImV4cCI6MTcyNDUxOTU1M30.venp9MFJWtzPWu4LVYV6LTe1AU6CBx93SFo05cyCH0I",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin-volunteers/getAllUsers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin-volunteers",
+								"getAllUsers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Resources",
+			"item": [
+				{
+					"name": "addResource",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MjU1ODQsImV4cCI6MTcyNDUyOTE4NH0.nucLKEb4QCC1XXSv58maZJBzamOueJ1A7tr3RQEI8oA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"لحمة\",\r\n    \"quantity\":20,\r\n    \"type\":\"طعام\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/resource/addResource",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resource",
+								"addResource"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllResource",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MjU1ODQsImV4cCI6MTcyNDUyOTE4NH0.nucLKEb4QCC1XXSv58maZJBzamOueJ1A7tr3RQEI8oA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/resource/getAllResource",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resource",
+								"getAllResource"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getResourceById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MjU1ODQsImV4cCI6MTcyNDUyOTE4NH0.nucLKEb4QCC1XXSv58maZJBzamOueJ1A7tr3RQEI8oA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/resource/getResourceById/66ca2c7d821e2b92f48a1d6f",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resource",
+								"getResourceById",
+								"66ca2c7d821e2b92f48a1d6f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteResourceById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MjU1ODQsImV4cCI6MTcyNDUyOTE4NH0.nucLKEb4QCC1XXSv58maZJBzamOueJ1A7tr3RQEI8oA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/resource/deleteResourceById/66ca2c7d821e2b92f48a1d6f",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resource",
+								"deleteResourceById",
+								"66ca2c7d821e2b92f48a1d6f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateResourceById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MjU1ODQsImV4cCI6MTcyNDUyOTE4NH0.nucLKEb4QCC1XXSv58maZJBzamOueJ1A7tr3RQEI8oA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\":40\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/resource/updateResourceById/66ca2c23821e2b92f48a1d69",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resource",
+								"updateResourceById",
+								"66ca2c23821e2b92f48a1d69"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getResourceName",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1NjcxNDUsImV4cCI6MTcyNDU3MDc0NX0.l0SKn52SNygHKft0mfC9_mZMWhYpq71-tMsEjQTilcQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/resource/getResourceByName?name=لحمة",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resource",
+								"getResourceByName"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "لحمة"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Needs",
+			"item": [
+				{
+					"name": "addNeeds",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MzMxNjIsImV4cCI6MTcyNDUzNjc2Mn0.voJnyL1P7grPWrhRnaJ476LKo08ildroNiz5vAujQPU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"need\":\"فراخ\",\r\n    \"quantity\":2,\r\n    \"price\":200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/needs/addNeeds?familyId=66ca177a2a9ed0ca38385560&member=66ca4ad5b0deb59cfda959c5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"needs",
+								"addNeeds"
+							],
+							"query": [
+								{
+									"key": "familyId",
+									"value": "66ca177a2a9ed0ca38385560"
+								},
+								{
+									"key": "member",
+									"value": "66ca4ad5b0deb59cfda959c5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllNeeds",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MzMxNjIsImV4cCI6MTcyNDUzNjc2Mn0.voJnyL1P7grPWrhRnaJ476LKo08ildroNiz5vAujQPU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/needs/getAllNeeds",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"needs",
+								"getAllNeeds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getNeedById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MzMxNjIsImV4cCI6MTcyNDUzNjc2Mn0.voJnyL1P7grPWrhRnaJ476LKo08ildroNiz5vAujQPU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/needs/getNeedById/66ca4ae4b0deb59cfda959ca",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"needs",
+								"getNeedById",
+								"66ca4ae4b0deb59cfda959ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllNeedByFamily",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MzMxNjIsImV4cCI6MTcyNDUzNjc2Mn0.voJnyL1P7grPWrhRnaJ476LKo08ildroNiz5vAujQPU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/needs/getAllNeedByFamily?familyId=66ca177a2a9ed0ca38385560",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"needs",
+								"getAllNeedByFamily"
+							],
+							"query": [
+								{
+									"key": "familyId",
+									"value": "66ca177a2a9ed0ca38385560"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAllNeedsByFamily",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MzMxNjIsImV4cCI6MTcyNDUzNjc2Mn0.voJnyL1P7grPWrhRnaJ476LKo08ildroNiz5vAujQPU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/needs/deleteAllNeedsByFamily?familyId=66ca177a2a9ed0ca38385560",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"needs",
+								"deleteAllNeedsByFamily"
+							],
+							"query": [
+								{
+									"key": "familyId",
+									"value": "66ca177a2a9ed0ca38385560"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteNeedById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MzMxNjIsImV4cCI6MTcyNDUzNjc2Mn0.voJnyL1P7grPWrhRnaJ476LKo08ildroNiz5vAujQPU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/needs/deleteNeedById/66ca4a5b58f438d0c2fbdcab",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"needs",
+								"deleteNeedById",
+								"66ca4a5b58f438d0c2fbdcab"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateNeedById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1MzMxNjIsImV4cCI6MTcyNDUzNjc2Mn0.voJnyL1P7grPWrhRnaJ476LKo08ildroNiz5vAujQPU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"need\":\"لحمة\",\r\n    \"quantity\":200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/needs/updateNeedById/66ca5311aa320185347280b1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"needs",
+								"updateNeedById",
+								"66ca5311aa320185347280b1"
+							],
+							"query": [
+								{
+									"key": "member",
+									"value": "66ca4ad5b0deb59cfda959c5",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Expiration",
+			"item": [
+				{
+					"name": "addExpiration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1OTkzODAsImV4cCI6MTcyNDYwMjk4MH0.-WagdWnlkS50cNeGSuRaHMH_TZMIQARtHecIfEruzWg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"resourceId\" :  \"66cb4bbccc0b520209460bb0\",\r\n    \"startDate\":\"2024-05-20\",\r\n    \"expirationDate\":\"2024-07-20\",\r\n    \"quantity\":30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/expiration/addExpiration",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expiration",
+								"addExpiration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateExpirationById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1OTU3NTksImV4cCI6MTcyNDU5OTM1OX0.GNUDox8Qm9-0H9VUfoO8__3t0dLl1WhWlKdvQ1zKf78",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"expirationDate\":\"2024-05-1\",\r\n    \"quantity\":40\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/expiration/updateExpirationById/66cb421e6989ad624225acd8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expiration",
+								"updateExpirationById",
+								"66cb421e6989ad624225acd8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllExpiration",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1OTU3NTksImV4cCI6MTcyNDU5OTM1OX0.GNUDox8Qm9-0H9VUfoO8__3t0dLl1WhWlKdvQ1zKf78",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/expiration/getAllExpiration",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expiration",
+								"getAllExpiration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getExpirationById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1OTU3NTksImV4cCI6MTcyNDU5OTM1OX0.GNUDox8Qm9-0H9VUfoO8__3t0dLl1WhWlKdvQ1zKf78",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/expiration/getExpirationById/66cb41e701d5b14a3539d69d",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expiration",
+								"getExpirationById",
+								"66cb41e701d5b14a3539d69d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteExpirationById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1OTU3NTksImV4cCI6MTcyNDU5OTM1OX0.GNUDox8Qm9-0H9VUfoO8__3t0dLl1WhWlKdvQ1zKf78",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/expiration/deleteExpirationById/66cb41e701d5b14a3539d69d",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expiration",
+								"deleteExpirationById",
+								"66cb41e701d5b14a3539d69d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllExpiringByNumberOfDay",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "ekhwat_elrab_app eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5ZmFiNzIxNjQ3NGFhODZkNGI2YTIiLCJpYXQiOjE3MjQ1OTkzODAsImV4cCI6MTcyNDYwMjk4MH0.-WagdWnlkS50cNeGSuRaHMH_TZMIQARtHecIfEruzWg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/expiration/getAllExpiringByNumberOfDay?numberOfDay=25",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expiration",
+								"getAllExpiringByNumberOfDay"
+							],
+							"query": [
+								{
+									"key": "numberOfDay",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
