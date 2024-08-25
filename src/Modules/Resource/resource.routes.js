@@ -5,7 +5,7 @@ import * as resourceController from "./resource.controller.js";
 import { authenticate } from "../../Middlewares/authentication.middleware.js";
 import { authorizationMiddleware } from "../../Middlewares/authorization.middleware.js";
 import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
-import { AddResourceSchema, GeneralSchema, UpdateResourceSchema } from "./resource.schema.js";
+import { AddResourceSchema, CheckNameSchema, GeneralSchema, UpdateResourceSchema } from "./resource.schema.js";
 import { validationMiddleware } from "../../Middlewares/validation.middleware.js";
 
 const router = Router();
@@ -48,5 +48,13 @@ router.put(
     errorHandler(authorizationMiddleware("admin")),
     errorHandler(validationMiddleware(UpdateResourceSchema)),
     errorHandler(resourceController.updateResourceById)
+)
+// get resource by name
+router.get(
+    "/getResourceByName",
+    errorHandler(authenticate()),
+    errorHandler(authorizationMiddleware("admin")),
+    errorHandler(validationMiddleware(CheckNameSchema)),
+    errorHandler(resourceController.getResourceByName)
 )
 export default router;

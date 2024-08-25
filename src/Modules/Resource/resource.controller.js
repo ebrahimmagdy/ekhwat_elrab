@@ -167,3 +167,28 @@ export const updateResourceById = async (req, res, next) => {
     .status(200)
     .json({ message: "Resource updated successfully", resource });
 };
+//-------------------------------------------------------
+// get resource by name
+export const getResourceByName = async (req, res, next) => {
+  // check user online
+  if (req.authUser.status !== "online") {
+    return next(
+      new ErrorClass(
+        "User must be online",
+        400,
+        "User must be online",
+        "delete user API"
+      )
+    );
+  }
+
+  // find resource by name
+  const resource = await Resource.findOne({ name: req.query.name });
+  if (!resource) {
+    return next(
+      new ErrorClass("Resource not found", 404, "name", "Get  Resource By Name API")
+    );
+  }
+
+  return res.status(200).json({ resource });
+};
