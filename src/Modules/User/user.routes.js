@@ -24,14 +24,14 @@ router.post(
 router.get(
   "/getAllUser",
   errorHandler(authenticate()),
-  errorHandler(authorizationMiddleware(["admin", "volunteer"])),
+  errorHandler(authorizationMiddleware("admin")),
   errorHandler(userController.getAllUser)
 );
 // get user by id
 router.get(
   "/getUserById/:id",
   errorHandler(authenticate()),
-  errorHandler(authorizationMiddleware(["admin", "volunteer"])),
+  errorHandler(authorizationMiddleware("admin")),
   errorHandler(validationMiddleware(GeneralSchema)),
   errorHandler(userController.getUserById)
 );

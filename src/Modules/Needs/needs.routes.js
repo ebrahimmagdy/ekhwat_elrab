@@ -1,6 +1,11 @@
 import { Router } from "express";
 import * as needController from "./needs.controller.js";
-import { AddNeedsSchema, checkFamilyIdInQuery, GeneralSchema, UpdateNeedsSchema } from "./needs.schema.js";
+import {
+  AddNeedsSchema,
+  checkFamilyIdInQuery,
+  GeneralSchema,
+  UpdateNeedsSchema,
+} from "./needs.schema.js";
 import { errorHandler } from "../../Middlewares/error-handling.middleware.js";
 import { authenticate } from "../../Middlewares/authentication.middleware.js";
 import { authorizationMiddleware } from "../../Middlewares/authorization.middleware.js";
@@ -20,14 +25,14 @@ router.post(
 router.get(
   "/getAllNeeds",
   errorHandler(authenticate()),
-  errorHandler(authorizationMiddleware(["admin", "volunteer"])),
+  errorHandler(authorizationMiddleware("admin")),
   errorHandler(needController.getAllNeeds)
 );
 // get need by id
 router.get(
   "/getNeedById/:id",
   errorHandler(authenticate()),
-  errorHandler(authorizationMiddleware(["admin", "volunteer"])),
+  errorHandler(authorizationMiddleware("admin")),
   errorHandler(validationMiddleware(GeneralSchema)),
   errorHandler(needController.getNeedById)
 );
@@ -35,11 +40,10 @@ router.get(
 router.get(
   "/getAllNeedByFamily",
   errorHandler(authenticate()),
-  errorHandler(authorizationMiddleware(["admin", "volunteer"])),
+  errorHandler(authorizationMiddleware("admin")),
   errorHandler(validationMiddleware(checkFamilyIdInQuery)),
   errorHandler(needController.getAllNeedByFamily)
-
-)
+);
 // delete need by id
 router.delete(
   "/deleteNeedById/:id",
@@ -47,7 +51,7 @@ router.delete(
   errorHandler(authorizationMiddleware("admin")),
   errorHandler(validationMiddleware(GeneralSchema)),
   errorHandler(needController.deleteNeedById)
-)
+);
 // delete all needs by family
 router.delete(
   "/deleteAllNeedsByFamily",
@@ -55,7 +59,7 @@ router.delete(
   errorHandler(authorizationMiddleware("admin")),
   errorHandler(validationMiddleware(checkFamilyIdInQuery)),
   errorHandler(needController.deleteAllNeedsByFamily)
-)
+);
 // update need by id
 router.put(
   "/updateNeedById/:id",
@@ -63,5 +67,5 @@ router.put(
   errorHandler(authorizationMiddleware("admin")),
   errorHandler(validationMiddleware(UpdateNeedsSchema)),
   errorHandler(needController.updateNeedById)
-)
-export default router
+);
+export default router;
