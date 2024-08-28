@@ -101,6 +101,10 @@ const admin_volunteersSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    supervisor: {
+      type:Boolean,
+      default : false
+  },
   },
   {
     timestamps: true,

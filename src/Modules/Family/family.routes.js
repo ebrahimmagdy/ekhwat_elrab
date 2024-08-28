@@ -30,7 +30,7 @@ router.get("/getAllFamily",
 router.get(
   "/getFamilyById/:id",
   errorHandler(authenticate()),
-  errorHandler(authorizationMiddleware(["admin", "volunteer"])),
+  errorHandler(authorizationMiddleware("admin")),
   errorHandler(validationMiddleware(GeneralSchema)),
   errorHandler(familyController.getFamilyById)
 );
