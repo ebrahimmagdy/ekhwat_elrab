@@ -21,10 +21,12 @@ router.post(
 );
 
 // get all family
-router.get("/getAllFamily",
+router.get(
+  "/getAllFamily",
   errorHandler(authenticate()),
-  errorHandler(authorizationMiddleware(["admin", "volunteer"])),
-  errorHandler(familyController.getAllFamily));
+  errorHandler(authorizationMiddleware("admin")),
+  errorHandler(familyController.getAllFamily)
+);
 
 // get family by id
 router.get(
